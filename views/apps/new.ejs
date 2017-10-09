@@ -28,13 +28,14 @@
                 <textarea name="appdesc" rows="8" cols="80"></textarea><br>
                 <label class='control-label col-sm-2' for="">App Version</label>
                 <input type="text" name="appverison" value=""><br>
-                <input class="btn btn-default" type="submit" name="" value="submit"><br>
-                <select class="control-label col-sm-2" name="analyst">
+                <label class='control-label col-sm-2' for="">Primary Tech</label>
+                <select class="control-label col-sm-2" name="_analysts">
                     <% for (var analyst of analysts ) { %>
-                        <option value="<% analyst._id %>"><=% analyst.fullname %></option>
+                        <option value="<%= analyst.id %>"> <%= analyst.fullname %></option>
                     <% } %>
+                </select><br>
+                <input class="btn btn-default" type="submit" name="" value="submit"><br>
 
-                </select>
             </form>
         </div>
 

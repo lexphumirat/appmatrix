@@ -58,7 +58,7 @@ const appSchema = new Schema ({
 
 
 
-    analysts: [{
+    _analysts: [{
         type: Schema.Types.ObjectId,
         ref: 'Analyst'
     }]
@@ -98,6 +98,7 @@ app.post('/analysts', function(request, response){
         mobilenum: request.body.mobilenum,
         desknum: request.body.desknum,
         email: request.body.email
+
     })
 
     analyst.save()
@@ -141,7 +142,8 @@ app.post('/applications', function(request, response){
         appzone: request.body.appzone,
         applevel: request.body.applevel,
         appdesc: request.body.appdesc,
-        appverison: request.body.appverison
+        appverison: request.body.appverison,
+        _analysts: request.body._analysts
     })
 
     application.save()
@@ -155,22 +157,22 @@ app.post('/applications', function(request, response){
 
 })
 
-app.get('/applications/new', function( request, response){
-    Analyst.find({}, function(err, anaylsts){
-        if (err){
-            console.log(err);
-            throw err;
-        }
-        response.render('apps/new', { anaylsts});
-    });
-});
-
-// app.get('/applications/new', function(request, response){
-//     Analyst.find()
-//     .sort('fullname')
-//     .then(anaylsts => response.render('apps/new', { anaylsts}))
-//     .catch(console.log);
-//
+// app.get('/applications/new', function( request, response){
+//     Analyst.find({}, function(err, analysts){
+//         if (err){
+//             console.log(err);
+//             throw err;
+//         }
+//         response.render('apps/new', { analysts});
+//     });
 // });
+
+app.get('/applications/new', function(request, response){
+    Analyst.find()
+    .sort('fullname')
+    .then(analysts => response.render('apps/new', { analysts}))
+    .catch(console.log);
+
+});
 
 app.listen(port, () => console.log('listen on port 8000 ${ port }'));
