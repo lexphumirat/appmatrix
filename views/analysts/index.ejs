@@ -9,53 +9,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-    <h1>analysts</h1>
+    <h1>Applications</h1>
     <div class="container">
     <div class="row">
-        <table>
-            <thead>
-                <tr>
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-2">
-                          Title
-                        </div>
-                        <div class="col-md-2">
-                          Name
-                        </div>
-                        <div class="col-md-2">
-                          Mobile
-                        </div>
-                        <div class="col-md-2">
-                          Office Number
-                        </div>
-                        <div class="col-md-2">
-                          Email
-                        </div>
-                        <div class="col-md-2">
-                          Action
-                        </div>
-                      </div>
-                    </div>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var analyst of analysts) { %>
-                    <tr>
-                        <td><a href="/analysts/new/<%= analyst.id%>"><%= analyst.jobtitle%></a></td>
-                        <td><%= analyst.fullname%></td>
-                        <td><%= analyst.mobilenum%></td>
+        <table class="table table-bordered">
+       <thead>
+         <tr>
+           <th>Title</th>
+           <th>Name</th>
+           <th>Mobile</th>
+           <th>Application</th>
+         </tr>
+       </thead>
+       <tbody>
+           <% for (var analyst of analysts) { %>
+         <tr>
+           <td><%= analyst.jobtitle%></td>
+           <td><%= analyst.fullname%></td>
+           <td><%= analyst.mobilenum%></td>
+           <td>App name</td>
+
+         </tr>
+         <% } %>
+
+       </tbody>
+     </table>
 
 
-
-
-                    </tr>
-
-                <% } %>
-            </tbody>
-        </table>
-
- <a href="/analysts/new<%= analyst.id%>"></a>
     </div>
 
     </div>

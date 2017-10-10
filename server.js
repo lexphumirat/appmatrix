@@ -76,30 +76,30 @@ app.get('/', function(request, response) {
 });
 
 
-app.get('/analysts', function(request, response){
-    Analyst.find({})
-
-    .then(analysts => {
-        response.render('analysts/index.ejs', { analysts});
-    })
-    .catch(function(eorror){
-        console.log('something went wrong on find');
-    })
-});
-
-
-
-// app.get('/analysts', function ( request, response){
-//     Analyst.find({}, function(err, analysts){
-//
-//         if (err){
-//             console.log(err);
-//             throw err;
-//         }
-//
-//         response.render('analysts/index.ejs', { analysts });
-//     });
+// app.get('/analysts', function(request, response){
+//     Analyst.find({})
+//     .then(analysts => {
+//         response.render('analysts/index.ejs', { analysts});
+//     })
+//     .catch(function(eorror){
+//         console.log('something went wrong on find');
+//     })
 // });
+
+
+
+app.get('/analysts', function ( request, response){
+    Analyst.find({})
+     .populate('analysts')
+     .exec(function(err, analysts){
+        if (err){
+            console.log(err);
+            throw err;
+        }
+
+        response.render('analysts/index.ejs', { analysts });
+    });
+});
 
  app.get('/analysts/new', function(request, response){
      response.render('analysts/new');
@@ -165,7 +165,11 @@ app.post('/applications', function(request, response){
     application.save()
         .then(function(){
             console.log('saved app');
-            response.redirect('/apps');
+            return Analyst.findbyIdAndUpdate(application._analysts, { $push: { applications: app._id }})
+             .then( analysts => {
+                 console.log('analysts');
+                 response.redirect('/apps');
+             })
         })
         .catch(error => {
             console.log('something went wrong');
