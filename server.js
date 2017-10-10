@@ -32,7 +32,7 @@ const analystSchema = new Schema({
     mobilenum: String,
     desknum: String,
 
-    applications: [{
+    _applications: [{
         type: Schema.Types.ObjectId,
         ref: 'Application'
     }]
@@ -75,16 +75,31 @@ app.get('/', function(request, response) {
 
 });
 
-app.get('/analysts', function ( request, response){
-    Analyst.find({}, function(err, analysts){
-        if (err){
-            console.log(err);
-            throw err;
-        }
 
-        response.render('analysts/index.ejs', { analysts });
-    });
+app.get('/analysts', function(request, response){
+    Analyst.find({})
+
+    .then(analysts => {
+        response.render('analysts/index.ejs', { analysts});
+    })
+    .catch(function(eorror){
+        console.log('something went wrong on find');
+    })
 });
+
+
+
+// app.get('/analysts', function ( request, response){
+//     Analyst.find({}, function(err, analysts){
+//
+//         if (err){
+//             console.log(err);
+//             throw err;
+//         }
+//
+//         response.render('analysts/index.ejs', { analysts });
+//     });
+// });
 
  app.get('/analysts/new', function(request, response){
      response.render('analysts/new');
@@ -112,26 +127,27 @@ app.post('/analysts', function(request, response){
 
 })
 
-// app.get('/appss', function (request, response){
-//     Application.find({})
-//     .then(applications => {
-//         response.render('apps/index', { applications });
-//     })
-//     .catch(function(error){
-//         console.log("error in adding apps");
-//     });
-// });
-
-app.get('/apps', function ( request, response){
-    Application.find({}, function(err, applications){
-        if (err){
-            console.log(err);
-            throw err;
-        }
-
+app.get('/apps', function (request, response){
+    Application.find({})
+    .populate('_analysts')
+    .then(applications => {
         response.render('apps/index', { applications });
+    })
+    .catch(function(error){
+        console.log("error in adding apps");
     });
 });
+
+// app.get('/apps', function ( request, response){
+//     Application.find({}, function(err, applications){
+//         if (err){
+//             console.log(err);
+//             throw err;
+//         }
+//
+//         response.render('apps/index', { applications });
+//     });
+// });
 
 app.post('/applications', function(request, response){
     console.log(request.body);
@@ -170,6 +186,7 @@ app.post('/applications', function(request, response){
 app.get('/applications/new', function(request, response){
     Analyst.find()
     .sort('fullname')
+
     .then(analysts => response.render('apps/new', { analysts}))
     .catch(console.log);
 
