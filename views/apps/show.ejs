@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Applications SHow</h1>
+
+        <p><%= application.appname %></p>
+        <form class="" action="/apps/<%= application.id%>/edit" method="post">
+            <label for="">App Name</label>
+            <input type="text" name="appname" value="<%= application.appname%>"><br>
+            <label for="">Server</label>
+            <input type="text" name="appserver" value="<%= application.appserver%>"><br>
+            <select class="control-label col-sm-2" name="_analysts">
+            
+            </select><br>
+            <input type="submit" name="" value="edit">
+
+        </form>
+
+        <form class="" action="/apps/<%= application.id%>/remove" method="post">
+            <input type="submit" name="" value="delete">
+        </form>
+
+
+
+
+    </body>
+</html>

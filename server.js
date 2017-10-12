@@ -69,10 +69,9 @@ const appSchema = new Schema ({
 
 const Analyst = mongoose.model('Analyst', analystSchema );
 const Application = mongoose.model('Application', appSchema );
+
 app.get('/', function(request, response) {
-
     response.render('index');
-
 });
 
 
@@ -163,17 +162,27 @@ app.post('/applications', function(request, response){
     })
 
     application.save()
-        .then(function(){
-            console.log('saved app');
-            return Analyst.findbyIdAndUpdate(application._analysts, { $push: { applications: app._id }})
-             .then( analysts => {
-                 console.log('analysts');
-                 response.redirect('/apps');
-             })
+        .then( _applications => {
+            console.log(application);
+            return Analyst.findById(application._analysts)
+            .then(analyst => {
+                analyst._applications.push(application);
+                return analyst.save();
+            });
         })
-        .catch(error => {
-            console.log('something went wrong');
-        })
+        .then(()=> response.redirect('/apps'))
+        .catch(console.log);
+        // .then(function(){
+        //     console.log('saved app');
+        //     return Analyst.findById(application._analysts, { $push: { applications: applications }})
+        //      .then( analysts => {
+        //          console.log('analysts', analysts);
+        //          response.redirect('/apps');
+        //      })
+        // })
+        // .catch(error => {
+        //     console.log('something went wrong');
+        // })
 
 })
 
@@ -190,10 +199,58 @@ app.post('/applications', function(request, response){
 app.get('/applications/new', function(request, response){
     Analyst.find()
     .sort('fullname')
-
     .then(analysts => response.render('apps/new', { analysts}))
     .catch(console.log);
 
 });
+
+//show id route
+app.get('/:id', (request, response) => {
+    Analyst.findById(request.params.id)
+    .populate('_applications')
+    .then(analyst => {
+        console.log(analyst);
+        response.render('analysts/show', { analyst })
+    })
+    .catch(console.log);
+});
+
+app.get('/:id/app', (request, response) => {
+
+    Application.findById(request.params.id)
+    .populate('analyst')
+    .then(application => {
+        console.log(application);
+        response.render('apps/show', { application })
+    })
+    .catch(console.log);
+});
+
+app.post('/apps/:id/edit', (request, response) => {
+    Application.findByIdAndUpdate(request.params.id, request.body)
+    .then(() =>{
+        console.log('editsomething');
+        response.redirect('/apps');
+    })
+    .catch(console.log)
+});
+
+// app.get('apps/:id/remove', function(req, res){
+//     console.log('deleteing something');
+//   Application.remove({ _id: req.params.id }, function(err, application){
+//     if (err) { console.log(err); }
+//     res.redirect('/apps');
+//   });
+// });
+
+app.post('/apps/:id/remove', (request, response) => {
+    Application.findByIdAndRemove(request.params.id)
+    .then(() =>{
+        console.log('remove');
+        response.redirect('/apps');
+    })
+
+    .catch(console.log)
+})
 
 app.listen(port, () => console.log('listen on port 8000 ${ port }'));

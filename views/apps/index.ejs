@@ -19,17 +19,23 @@
            <th>Server</th>
            <th>Version</th>
            <th>Tech</th>
+           <td>Action</td>
          </tr>
        </thead>
        <tbody>
-           <% for ( var app of applications) { %>
+           <% for ( const application of applications) { %>
          <tr>
-           <td><%= app.appname %></td>
-           <td><%= app.appserver %></td>
-           <td><%= app.appverison %></td>
-           <td><%= app._analysts %></td>
+           <td><a href="/<%=application.id%>/app"><%= application.appname %></a></td>
+           <td><%= application.appserver %></td>
+           <td><%= application.appverison %></td>
+           <td>
+                  <% for (const analyst of application._analysts) { %>
+                     <a href="<%=analyst.id%>"><%= analyst.fullname%></a>
+                  <% } %>
+           </td>
          </tr>
          <% } %>
+
 
        </tbody>
      </table>
