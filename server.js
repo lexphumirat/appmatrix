@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 // const $ = require('jQuery');
 const { Schema } = mongoose;
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 const app = express();
 
 
@@ -358,4 +358,4 @@ app.post('/admin/analyst/:id/edit', (request, response) => {
     .catch(console.log)
 });
 
-app.listen(port, () => console.log('listen on port 8000 ${ port }'));
+app.listen(port, () => console.log('listen on port 8080 ${ port }'));
