@@ -9,54 +9,43 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-
+    <h1>Applications</h1>
     <div class="container">
     <div class="row">
+        <table class="table table-bordered">
+       <thead>
+         <tr>
+           <th>App Name</th>
+           <th>Server</th>
+           <th>Version</th>
+           <th>Tech</th>
+           <td>Action</td>
+         </tr>
+       </thead>
+       <tbody>
+           <% for ( const application of applications) { %>
+         <tr>
+           <td><a href="/<%=application.id%>/app"><%= application.appname %></a></td>
+           <td><%= application.appserver %></td>
+           <td><%= application.appverison %></td>
+           <td>
+                  <% for (const analyst of application._analysts) { %>
+                     <a href="<%=analyst.id%>"><%= analyst.fullname%></a>
+                  <% } %>
+           </td>
+         </tr>
+         <% } %>
 
 
-    <table class="table">
-
-  <thead class="thead-inverse">
-    <tr>
-      <th><h3><%= analyst.fullname %></h3></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Position:</th>
-      <td><%= analyst.jobtitle %></td>
-    </tr>
-    <tr>
-      <th scope="row">Mobile:</th>
-      <td><%= analyst.mobilenum %></td>
-    </tr>
-    <tr>
-      <th scope="row">Desk Number:</th>
-      <td><%= analyst.desknum %></td>
-    </tr>
-    <tr>
-      <th scope="row">Email:</th>
-      <td><%= analyst.email %></td>
-    </tr>
-    <tr>
-      <th scope="row">Primary Applications:</th>
-      <td>
-          <% for (const app of analyst._applications) { %>
-          <ul class="list-unstyled">
-              <li><%= app.appname %></li>
-          </ul>
-          <% } %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
+       </tbody>
+     </table>
 
 
     </div>
-</div>
+
+    </div>
+
+
 
 
     <!-- Optional JavaScript -->

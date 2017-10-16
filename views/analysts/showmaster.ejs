@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Analyst</h1>
+
+        <p><%= analyst.fullname %></p>
+
+        <% for (const app of analyst._applications) { %>
+        <ul>
+            <li><%= app.appname %></li>
+        </ul>
+        <% } %>
+
+        <!-- <p><%= analyst._applications %></p> -->
+    </body>
+</html>

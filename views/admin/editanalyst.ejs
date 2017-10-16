@@ -13,44 +13,26 @@
     <div class="container">
     <div class="row">
 
+  <h1>Edit Admin Dashboard</h1>
 
-    <table class="table">
+  <div class="container">
+  <div class="row">
+      <div class="col">
+      <form class="form-horizontal" action="/admin/analyst/<%= analyst._id %>/edit" method="post">
+              <label class='control-label col-sm-2' for="">Title:</label>
+              <input type="text" name="jobtitle" value="<%= analyst.jobtitle %>"><br>
+              <label class='control-label col-sm-2' for="">Full Name</label>
+              <input type="text" name="fullname" value="<%= analyst.fullname %>"><br>
+              <label class='control-label col-sm-2' for="">Mobile Number</label>
+              <input type="text" name="mobilenum" value="<%= analyst.mobilenum %>"><br>
+              <label class='control-label col-sm-2' for="">Desk Number</label>
+              <input type="text" name="desknum" value="<%= analyst.desknum %>"><br>
+              <label class='control-label col-sm-2' for="">Email</label>
+              <input type="text" name="email" value="<%= analyst.email %>"><br>
+              <input class="btn btn-default" type="submit" name="" value="submit"><br>
+          </form>
+      </div>
 
-  <thead class="thead-inverse">
-    <tr>
-      <th><h3><%= analyst.fullname %></h3></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Position:</th>
-      <td><%= analyst.jobtitle %></td>
-    </tr>
-    <tr>
-      <th scope="row">Mobile:</th>
-      <td><%= analyst.mobilenum %></td>
-    </tr>
-    <tr>
-      <th scope="row">Desk Number:</th>
-      <td><%= analyst.desknum %></td>
-    </tr>
-    <tr>
-      <th scope="row">Email:</th>
-      <td><%= analyst.email %></td>
-    </tr>
-    <tr>
-      <th scope="row">Primary Applications:</th>
-      <td>
-          <% for (const app of analyst._applications) { %>
-          <ul class="list-unstyled">
-              <li><%= app.appname %></li>
-          </ul>
-          <% } %>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 
 

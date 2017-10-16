@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Applications Show</h1>
+
+        <p><%= application.appname %></p>
+        <form class="" action="/admin/<%= application.id%>/edit" method="post">
+            <label for="">App Name</label>
+            <input type="text" name="appname" value="<%= application.appname%>"><br>
+            <label for="">Server</label>
+            <input type="text" name="appserver" value="<%= application.appserver%>"><br>
+            <label for="">App Backup</label>
+            <input type="text" name="appbackup" value="<%= application.appbackup%>"><br>
+            <select class="control-label col-sm-2" name="_analysts">
+                <% for (const analyst of analysts ) { %>
+                    <option value="<%= analyst.id %>"  <%= application._analysts.find( a =>
+                        {
+
+                            return a._id.toString() === analyst._id.toString()  }) ? 'selected' : '' %> > <%= analyst.fullname%></option>
+                <% } %>
+            </select><br>
+            <input type="submit" name="" value="edit">
+
+        </form>
+
+        <form class="" action="/apps/<%= application.id%>/remove" method="post">
+            <input type="submit" name="" value="delete">
+        </form>
+
+
+
+
+    </body>
+</html>

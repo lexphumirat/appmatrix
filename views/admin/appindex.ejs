@@ -21,34 +21,44 @@
     </script>
 
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/> -->
+
+
+
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
 
   </head>
   <body>
-    <h1>Analyst</h1>
+    <h1>Admin Dashboard Applications</h1>
     <div class="container">
     <div class="row">
+        <a href="/"><button type="button">Back to Admin Dashoard</button></a>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 
 <table id="myTable">
   <tr class="header">
-    <th style="width:15%;">Name</th>
-    <th style="width:10%;">Title</th>
-    <th style="width:10%;">Mobile</th>
-    <th style="width:15%;">Office Number</th>
-    <th style="width:10%;">Email</th>
+    <th style="width:20%;">App Name</th>
+    <th style="width:10%;">Server</th>
+    <th style="width:10%;">Vendor</th>
+    <th style="width:10%;">Criticlity</th>
+    <th style="width:20%;">App Owners</th>
+    <th style="width:20%;">App Backup</th>
+
   </tr>
-  <% for (const analyst of analysts) { %>
+  <% for ( const application of applications) { %>
   <tr>
-      <td><a href="<%=analyst.id%>"><%= analyst.fullname%></a></td>
-      <td><%= analyst.jobtitle%></a></td>
-      <td><%= analyst.mobilenum%></td>
-      <td><%= analyst.desknum%></td>
-      <td><%= analyst.email%></td>
-
-
+      <td><a href="/<%=application.id%>/admin"><%= application.appname %></a></td>
+      <td><%= application.appserver %></td>
+      <td><%= application.appvendor %></td>
+      <td><%= application.applevel %></td>
+      <td>
+             <% for (const analyst of application._analysts) { %>
+                <a href="<%=analyst.id%>"><%= analyst.fullname%></a>
+             <% } %>
+      </td>
+      <td><%= application.appbackup %></td>
   </tr>
    <% } %>
 

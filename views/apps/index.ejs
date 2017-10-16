@@ -4,45 +4,88 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src='/js/snippit.js'>
+
+    </script>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+        $('select').addClass('mdb-select');
+        $('.mdb-select').material_select();
+    });
+    </script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/> -->
+
+
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+
   </head>
   <body>
     <h1>Applications</h1>
     <div class="container">
     <div class="row">
-        <table class="table table-bordered">
-       <thead>
-         <tr>
-           <th>App Name</th>
-           <th>Server</th>
-           <th>Version</th>
-           <th>Tech</th>
-           <td>Action</td>
-         </tr>
-       </thead>
-       <tbody>
-           <% for ( const application of applications) { %>
-         <tr>
-           <td><a href="/<%=application.id%>/app"><%= application.appname %></a></td>
-           <td><%= application.appserver %></td>
-           <td><%= application.appverison %></td>
-           <td>
-                  <% for (const analyst of application._analysts) { %>
-                     <a href="<%=analyst.id%>"><%= analyst.fullname%></a>
-                  <% } %>
-           </td>
-         </tr>
-         <% } %>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Applications...." title="Type in a name">
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width:20%;">App Name</th>
+    <th style="width:10%;">Server</th>
+    <th style="width:10%;">Vendor</th>
+    <th style="width:10%;">Criticlity</th>
+    <th style="width:20%;">App Owners</th>
+    <th style="width:20%;">App Backup</th>
+
+  </tr>
+  <% for ( const application of applications) { %>
+  <tr>
+      <td><a href="/<%=application.id%>/app"><%= application.appname %></a></td>
+      <td><%= application.appserver %></td>
+      <td><%= application.appvendor %></td>
+      <td><%= application.applevel %></td>
+      <td>
+             <% for (const analyst of application._analysts) { %>
+                <a href="<%=analyst.id%>"><%= analyst.fullname%></a>
+             <% } %>
+      </td>
+      <td><%= application.appbackup %></td>
+  </tr>
+   <% } %>
 
 
-       </tbody>
-     </table>
 
+</table>
 
-    </div>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 
+        </div>
     </div>
 
 

@@ -7,33 +7,36 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+
+
   </head>
   <body>
-    <h1>Add Applications</h1>
+    <h1>Edit Applications</h1>
     <div class="container">
     <div class="row">
         <div class="col">
-        <form class="form-horizontal" action="/applications" method="post">
+        <form class="form-horizontal" action="/admin/<%= application.id%>/edit" method="post">
                 <label class='control-label col-sm-2' for="">Application Name:</label>
-                <input type="text" name="appname" value=""><br>
+                <input type="text" name="appname" value="<%= application.appname%>"><br>
                 <label class='control-label col-sm-2' for="">App Server:</label>
-                <input type="text" name="appserver" value=""><br>
+                <input type="text" name="appserver" value="<%= application.appserver%>"><br>
                 <label class='control-label col-sm-2' for="">App Vendor:</label>
-                <input type="text" name="appvendor" value=""><br>
+                <input type="text" name="appvendor" value="<%= application.appvendor%>"><br>
                 <label class='control-label col-sm-2' for="">Vendor Support Num:</label>
-                <input type="text" name="appvensupport" value=""><br>
+                <input type="text" name="appvensupport" value="<%= application.appvensupport%>"><br>
                 <label class='control-label col-sm-2' for="">App Zone</label>
-                <input type="text" name="appzone" value=""><br>
-                <label class='control-label col-sm-2' for="">App Level</label>
-                <input type="text" name="applevel" value=""><br>
+                <input type="text" name="appzone" value="<%= application.appzone%>"><br>
+                <label class='control-label col-sm-2' for="">Criticlity</label>
+                <input type="text" name="applevel" value="<%= application.applevel%>"><br>
                 <label class='control-label col-sm-2' for="">App Desc</label>
-                <textarea name="appdesc" rows="8" cols="80"></textarea><br>
+                <textarea name="appdesc" rows="8" cols="80" ><%= application.appdesc%></textarea><br>
                 <label class='control-label col-sm-2' for="">Main Window</label>
-                <textarea name="appmaint" rows="8" cols="80"></textarea><br>
+                <textarea name="appmaint" rows="8" cols="80"><%= application.appmaint%></textarea><br>
                 <label class='control-label col-sm-2' for="">App Version</label>
-                <input type="text" name="appverison" value=""><br>
+                <input type="text" name="appverison" value="<%= application.appverison%>"><br>
                 <label class='control-label col-sm-2' for="">Dept. Owner</label>
-                <input type="text" name="appdataowner" value=""><br>
+                <input type="text" name="appdataowner" value="<%= application.appdataowner%>"><br>
                 <label class='control-label col-sm-2' for="">App Owners</label>
 
                 <select class="control-label col-sm-2" name="_analysts">
@@ -42,7 +45,7 @@
                     <% } %>
                 </select><br>
                 <label class='control-label col-sm-2' for="">App Backup</label>
-                <input type="text" name="appbackup" value=""><br>
+                <input type="text" name="appbackup" value="<%= application.appbackup%>"><br>
                 <input class="btn btn-default" type="submit" name="" value="submit"><br>
 
             </form>

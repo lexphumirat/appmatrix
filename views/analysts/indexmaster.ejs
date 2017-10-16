@@ -9,54 +9,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-
+    <h1>Analyst</h1>
     <div class="container">
     <div class="row">
+        <table class="table table-bordered">
+       <thead>
+         <tr>
+           <th>Title</th>
+           <th>Name</th>
+           <th>Mobile</th>
+           <th>Application</th>
+         </tr>
+       </thead>
+       <tbody>
+           <% for (const analyst of analysts) { %>
+         <tr>
+           <td><%= analyst.jobtitle%></td>
+           <td><a href="<%=analyst.id%>"><%= analyst.fullname%></a></td>
+           <td><%= analyst.mobilenum%></td>
+           <td>App name</td>
 
+         </tr>
+         <% } %>
 
-    <table class="table">
-
-  <thead class="thead-inverse">
-    <tr>
-      <th><h3><%= analyst.fullname %></h3></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Position:</th>
-      <td><%= analyst.jobtitle %></td>
-    </tr>
-    <tr>
-      <th scope="row">Mobile:</th>
-      <td><%= analyst.mobilenum %></td>
-    </tr>
-    <tr>
-      <th scope="row">Desk Number:</th>
-      <td><%= analyst.desknum %></td>
-    </tr>
-    <tr>
-      <th scope="row">Email:</th>
-      <td><%= analyst.email %></td>
-    </tr>
-    <tr>
-      <th scope="row">Primary Applications:</th>
-      <td>
-          <% for (const app of analyst._applications) { %>
-          <ul class="list-unstyled">
-              <li><%= app.appname %></li>
-          </ul>
-          <% } %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
+       </tbody>
+     </table>
 
 
     </div>
-</div>
+
+    </div>
+
+
 
 
     <!-- Optional JavaScript -->
