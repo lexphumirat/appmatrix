@@ -134,7 +134,7 @@ app.post('/analysts', function(request, response){
     analyst.save()
         .then(function(){
             console.log('saved user');
-            response.redirect('/analysts');
+            response.redirect('/admin/analysts');
         })
         .catch(error => {
             console.log('something went wrong');
