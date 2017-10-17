@@ -43,6 +43,7 @@
     <th style="width:10%;">Server</th>
     <th style="width:10%;">Vendor</th>
     <th style="width:10%;">Criticlity</th>
+    <th style="width:10%;">App Status</th>
     <th style="width:20%;">App Owners</th>
     <th style="width:20%;">App Backup</th>
 
@@ -53,6 +54,7 @@
       <td><%= application.appserver %></td>
       <td><%= application.appvendor %></td>
       <td><%= application.applevel %></td>
+      <td><%= application.appstat %></td>
       <td>
              <% for (const analyst of application._analysts) { %>
                 <a href="<%=analyst.id%>"><%= analyst.fullname%></a>
