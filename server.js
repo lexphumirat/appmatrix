@@ -58,6 +58,7 @@ const appSchema = new Schema ({
     appmaint: String,
     appvensupport: String,
     appstat: String,
+    apptype: String,
 
 
 
@@ -203,6 +204,7 @@ app.post('/applications', function(request, response){
         appbackup: request.body.appbackup,
         appdataowner: request.body.appdataowner,
         appstat: request.body.appstat,
+        apptype: request.body.apptype,
         _analysts: request.body._analysts
     })
 
