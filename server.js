@@ -213,7 +213,7 @@ app.post('/applications', function(request, response){
                 return analyst.save();
             });
         })
-        .then(()=> response.redirect('/apps'))
+        .then(()=> response.redirect('/admin'))
         .catch(console.log);
         // .then(function(){
         //     console.log('saved app');
