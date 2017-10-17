@@ -42,8 +42,11 @@
                 <label class='control-label col-sm-2' for="">App Owners</label>
 
                 <select class="control-label col-sm-2" name="_analysts">
-                    <% for (var analyst of analysts ) { %>
-                        <option value="<%= analyst.id %>"> <%= analyst.fullname %></option>
+                    <% for (const analyst of analysts ) { %>
+                        <option value="<%= analyst.id %>"  <%= application._analysts.find( a =>
+                            {
+
+                                return a._id.toString() === analyst._id.toString()  }) ? 'selected' : '' %> > <%= analyst.fullname%></option>
                     <% } %>
                 </select><br>
                 <label class='control-label col-sm-2' for="">App Backup</label>
